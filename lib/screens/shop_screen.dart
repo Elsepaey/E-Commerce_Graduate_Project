@@ -1462,6 +1462,7 @@ import 'package:graduate_project/cubits/profile/profile_state.dart';
 import 'package:graduate_project/screens/product_detail_screen.dart';
 import 'package:graduate_project/screens/wishlist/favourite_button.dart';
 import 'package:graduate_project/screens/wishlist/wishlist_cubit.dart';
+import 'package:graduate_project/utils/app_responsive.dart';
 import 'package:graduate_project/widgets/custom_container_navbar.dart';
 import 'package:graduate_project/widgets/custom_textfield_stack.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -1692,22 +1693,22 @@ class ShopScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.network(
-                                    product.image!,
-                                    height: 120,
+                                    product.image,
+                                    height: 105.h(),
                                     fit: BoxFit.contain,
                                     errorBuilder: (context, error,
                                             stackTrace) =>
-                                        const Icon(Icons.image_not_supported,
-                                            size: 50),
+                                         Icon(Icons.image_not_supported,
+                                            size: 50.s()),
                                   ),
                                   Divider(color: Colors.grey.shade300),
                                   GestureDetector(
                                     child: Padding(
-                                      padding: const EdgeInsets.all(10),
+                                      padding:  EdgeInsets.all(10.s()),
                                       child: Column(
                                         children: [
                                           Text(
-                                            product.name!,
+                                            product.name,
                                             style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,

@@ -173,6 +173,7 @@ import 'package:graduate_project/screens/who_are_us_screen.dart';
 import 'package:graduate_project/screens/wishlist/wish_list_screen.dart';
 import 'package:graduate_project/screens/wishlist/wishlist_cubit.dart';
 import 'package:graduate_project/services/services_locator.dart';
+import 'package:graduate_project/utils/app_responsive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -190,6 +191,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppResponsive.context = context;
+
     final sampleProduct = ProductDM(
       id: "1",
       image: 'https://via.placeholder.com/150',
