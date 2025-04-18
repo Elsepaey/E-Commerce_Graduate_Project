@@ -492,34 +492,57 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:graduate_project/constants.dart';
 import 'package:graduate_project/models/disply_product.dart';
+import 'package:graduate_project/screens/wishlist/favourite_button.dart';
 import 'package:graduate_project/widgets/custom_shortbutton.dart';
+
+import 'cart/cart_controller.dart';
+import 'cart/cart_screen.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final ProductDM product;
+  final bool isFav;
 
-  ProductDetailScreen({required this.product});
+  ProductDetailScreen({required this.product, required this.isFav});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  int _counter = 1;
+  final CartController cartController = Get.find();
+
+  late bool _isFav; // Local state to track favorite status
+  int counter = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFav = widget.isFav; // Initialize with the passed value
+  }
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      counter++;
     });
   }
 
   void _decrementCounter() {
-    if (_counter > 1) {
+    if (counter > 1) {
       setState(() {
-        _counter--;
+        counter--;
       });
     }
+  }
+
+  // Add this method to update favorite status
+  void _updateFavoriteStatus(bool newStatus) {
+    setState(() {
+      _isFav = newStatus;
+    });
   }
 
   @override
@@ -536,11 +559,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           },
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.favorite_border, color: Colors.red),
-            onPressed: () {
-              // Wishlist functionality
-            },
+          FavouriteButton(
+            widget.product,
+            _isFav,
+            onStatusChanged: _updateFavoriteStatus, // Pass the callback
           ),
         ],
       ),
@@ -569,7 +591,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     left: 20,
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 138, 193, 141),
                         borderRadius: BorderRadius.circular(10),
@@ -591,7 +613,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     right: 10,
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.6),
                         borderRadius: BorderRadius.circular(12),
@@ -661,7 +683,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      '$_counter',
+                      '$counter',
                       style: TextStyle(fontSize: 24),
                     ),
                   ),
@@ -680,14 +702,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   SizedBox(width: 30),
-                  CustomShortbutton(title: 'Add to Cart'),
+                  CustomShortbutton(title: 'Add to Cart',onPressed: (){
+                    cartController.addToCart(CartItem(product: widget.product, quantity: counter));
+
+                  },),
                 ],
               ),
               SizedBox(height: 20),
             ],
           ),
         ),
-      ),
-    );
+      ),    );
   }
 }

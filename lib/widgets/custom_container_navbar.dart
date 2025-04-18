@@ -1,38 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:graduate_project/constants.dart';
-import 'package:graduate_project/screens/cart_screen.dart';
-import 'package:graduate_project/screens/community_screen.dart';
-import 'package:graduate_project/screens/scanner_screen.dart';
-import 'package:graduate_project/screens/shop_screen.dart';
-import 'package:graduate_project/screens/wishlist/wish_list_screen.dart';
 
-class CustomContainerNavbar extends StatefulWidget {
-  @override
-  _CustomContainerNavbarState createState() => _CustomContainerNavbarState();
-}
+import '../screens/mainScreen/main_screen_controller.dart';
 
-class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
-  int _selectedIndex = 0;
+class CustomContainerNavbar extends StatelessWidget {
+  final MainScreenController controller = Get.find();
+  // final CartController cartController = Get.put(CartController());
 
-  // List of pages corresponding to each icon
-  final List<Widget> _pages = [
-    ShopScreen(),
-    CartScreen(),
-    ScannerScreen(), // Added Scanner Page
-    WishListScreen(),
-    CommunityScreen(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Navigate to the selected page
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => _pages[index]),
-    );
-  }
+  CustomContainerNavbar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +20,13 @@ class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
           height: 88,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+            borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
                 blurRadius: 5,
                 spreadRadius: 1,
-                offset: Offset(0, -2),
+                offset: const Offset(0, -2),
               ),
             ],
           ),
@@ -58,11 +34,9 @@ class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(Icons.home, 'Home', 0),
-              SizedBox(
-                width: 1,
-              ),
+              const SizedBox(width: 1),
               _buildNavItem(Icons.shopping_cart, 'Cart', 1),
-              SizedBox(width: 20), // Spacer for the floating scanner icon
+              const SizedBox(width: 20), // Spacer for the floating scanner icon
               _buildNavItem(Icons.favorite, 'Wishlist', 3),
               _buildNavItem(Icons.group, 'Community', 4),
             ],
@@ -72,7 +46,7 @@ class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
           bottom: 60,
           right: 178, // Position above the container
           child: GestureDetector(
-            onTap: () => _onItemTapped(2),
+            onTap: () => controller.changeTab(index: 2),
             child: Container(
               height: 50,
               width: 50,
@@ -83,7 +57,7 @@ class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
                   BoxShadow(
                     color: kWhiteColor,
                     blurRadius: 10,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -103,9 +77,9 @@ class _CustomContainerNavbarState extends State<CustomContainerNavbar> {
   }
 
   Widget _buildNavItem(IconData icon, String label, int index) {
-    final isSelected = _selectedIndex == index;
+    final isSelected = controller.currentTab == index;
     return GestureDetector(
-      onTap: () => _onItemTapped(index),
+      onTap: () => controller.changeTab(index: index),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

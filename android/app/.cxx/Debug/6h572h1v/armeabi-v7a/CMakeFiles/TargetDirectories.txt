@@ -1,0 +1,2 @@
+E:/e_commerce/android/app/.cxx/Debug/6h572h1v/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/e_commerce/android/app/.cxx/Debug/6h572h1v/armeabi-v7a/CMakeFiles/rebuild_cache.dir

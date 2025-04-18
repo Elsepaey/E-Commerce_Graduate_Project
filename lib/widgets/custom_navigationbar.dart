@@ -529,7 +529,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:graduate_project/screens/cart_screen.dart';
+import 'package:graduate_project/screens/cart/cart_screen.dart';
 import 'package:graduate_project/screens/community_screen.dart';
 import 'package:graduate_project/screens/shop_screen.dart';
 import 'package:graduate_project/screens/wishlist/wish_list_screen.dart';

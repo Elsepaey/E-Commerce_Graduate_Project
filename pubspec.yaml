@@ -54,7 +54,7 @@ dependencies:
   skeletonizer: ^1.4.3
   connectivity_plus:
   dartz:
-
+  get: ^4.7.2
   
   
 

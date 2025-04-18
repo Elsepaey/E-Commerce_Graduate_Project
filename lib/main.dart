@@ -151,14 +151,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:graduate_project/cubits/profile/profile_cubit.dart';
 import 'package:graduate_project/models/disply_product.dart'; // Corrected import
 import 'package:graduate_project/screens/cache/cache_helper.dart';
-import 'package:graduate_project/screens/cart_screen.dart';
+import 'package:graduate_project/screens/cart/cart_screen.dart';
 import 'package:graduate_project/screens/changeyour_password_screen.dart';
 import 'package:graduate_project/screens/contact_us_screen.dart';
 import 'package:graduate_project/screens/forgot_yourpassword.dart';
 import 'package:graduate_project/screens/login_page.dart';
+import 'package:graduate_project/screens/mainScreen/main_screen_view.dart';
 import 'package:graduate_project/screens/product_detail_screen.dart';
 import 'package:graduate_project/screens/profile_screen.dart';
 import 'package:graduate_project/screens/reset_password.dart';
@@ -214,18 +216,17 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => WishlistCubit()..loadWishlist()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (context) => SplashScreen(),
           'StartScreen': (context) => StartScreen(),
           'LoginPage': (context) => LoginPage(),
           'SignupScreen': (context) => SignupScreen(),
+          'MainScreen':(context)=>MainScreen(),
           'ShopScreen': (context) => ShopScreen(),
           'SettingScreen': (context) => SettingScreen(),
           'ProfileScreen': (context) => ProfileScreen(),
-          'ProductDetailScreen': (context) =>
-              ProductDetailScreen(product: sampleProduct),
           'WishListScreen': (context) => WishListScreen(),
           'ForgotYourpassword': (context) => ForgotYourpassword(),
           'ChangeyourPasswordScreen': (context) => ChangeyourPasswordScreen(),

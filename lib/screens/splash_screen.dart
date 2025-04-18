@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final refreshToken = CacheHelper.getString(key: 'refreshToken');
 
     if (accessToken.isNotEmpty && refreshToken.isNotEmpty) {
-      Navigator.pushReplacementNamed(context, 'ShopScreen');
+      Navigator.pushReplacementNamed(context, 'MainScreen');
     } else {
       Navigator.pushReplacementNamed(context, 'StartScreen');
     }
